@@ -10,6 +10,7 @@ if (message) {
   document.querySelector('h1').innerHTML = message;
 }
 
+const linkInput = document.querySelector('#link-input');
 document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault();
 
@@ -19,7 +20,21 @@ document.querySelector('form').addEventListener('submit', event => {
   const input = document.querySelector('#message-input');
   const encrypted = btoa(input.value);
 
-  const linkInput = document.querySelector('#link-input');
+
   linkInput.value = `${window.location}#${encrypted}`;
-  linkInput.select();
+  console.log(linkInput.value);
 });
+
+const copyBotton = document.querySelector('.btn-copy');
+copyBotton.addEventListener('click', () => {
+  copyValueInput();
+});  
+
+function copyValueInput() {
+  // Select the text field
+  linkInput.select();
+  linkInput.setSelectionRange(0, 99999);
+
+  // Copy the text inside the text field
+  document.execCommand('copy');
+}
